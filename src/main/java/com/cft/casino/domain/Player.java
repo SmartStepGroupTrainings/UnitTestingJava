@@ -2,11 +2,11 @@ package com.cft.casino.domain;
 
 public class Player {
     private Game activeGame;
-    private boolean hasChips;
+    private int chips;
 
-    public void joins(Game game) throws GameJoinException {
+    public void joins(Game game) throws CasinoGameException {
         if (this.activeGame != null) {
-            throw new GameJoinException("com.cft.casino.Player must leave the current game before joining another game");
+            throw new CasinoGameException("Player must leave the current game before joining another game");
         }
         this.activeGame = game;
     }
@@ -19,11 +19,20 @@ public class Player {
         activeGame = null;
     }
 
-    public boolean hasChips() {
-        return this.hasChips;
+    public void buyChips(int chips) {
+        this.chips += chips;
     }
 
-    public void buyChips(int chips) {
-        hasChips = true;
+    public int getAvailableChips() {
+        return chips;
+    }
+
+    public void bet(Bet bet) throws CasinoGameException {
+        if (bet.getAmount() > this.chips) {
+            throw new CasinoGameException("Can not bet more than chips available");
+        }
+
+        this.chips -= bet.getAmount();
+        activeGame.addBet(this, bet);
     }
 }
