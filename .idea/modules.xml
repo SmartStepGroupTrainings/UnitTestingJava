@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/UnitTestingJava.iml" filepath="$PROJECT_DIR$/UnitTestingJava.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/main/java/com.cft.casino.domain/com.cft.casino.domain.iml" filepath="$PROJECT_DIR$/src/main/java/com.cft.casino.domain/com.cft.casino.domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.cft.casino.domain/com.cft.casino.domain.iml" filepath="$PROJECT_DIR$/com.cft.casino.domain/com.cft.casino.domain.iml" />
     </modules>
   </component>
 </project>
