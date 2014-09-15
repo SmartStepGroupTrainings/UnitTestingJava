@@ -30,4 +30,6 @@ _ReSharper*/
 
 *.opensdf
 
-.idea\workspace.xml
+.idea/workspace.xml
+.gradle/
+build/
