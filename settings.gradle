@@ -1,0 +1,4 @@
+rootProject.name = 'UnitTestingJava'
+
+include 'com.cft.casino.domain'
+
