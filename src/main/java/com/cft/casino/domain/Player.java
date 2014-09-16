@@ -1,21 +1,22 @@
 package com.cft.casino.domain;
 
 public class Player {
-    private Game activeGame;
+    private RollDiceGame activeGame;
     private int chips;
 
-    public void joins(Game game) throws CasinoGameException {
+    public void joins(RollDiceGame game) throws CasinoGameException {
         if (this.activeGame != null) {
             throw new CasinoGameException("Player must leave the current game before joining another game");
         }
         this.activeGame = game;
     }
 
-    public Game activeGame() {
+    public RollDiceGame activeGame() {
         return activeGame;
     }
 
-    public void leave() {
+    public void leave() throws CasinoGameException {
+        activeGame.leave(this);
         activeGame = null;
     }
 
