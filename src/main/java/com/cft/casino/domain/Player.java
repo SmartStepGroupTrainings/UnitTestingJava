@@ -20,7 +20,8 @@ public class Player {
         activeGame = null;
     }
 
-    public void buyChips(int chips) {
+    public void buyChips(int chips) throws CasinoGameException{
+        if (chips < 0) throw new CasinoGameException("Buying negative numbers is not allowed");
         this.chips += chips;
     }
 
@@ -36,4 +37,10 @@ public class Player {
         this.chips -= bet.getAmount();
         activeGame.addBet(this, bet);
     }
+
+    public void win(int chips) {
+        this.chips += chips;
+    }
+
+    public void lose() {}
 }
