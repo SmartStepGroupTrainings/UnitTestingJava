@@ -19,9 +19,8 @@ public class RollDiceGame {
     public void play(IDice dice) throws CasinoGameException {
         int winningScore = roll(dice);
 
-        for (HashMap.Entry<Player, Bet> playerBets : playersBets.entrySet()) {
-            Player player = playerBets.getKey();
-            Bet bet = playerBets.getValue();
+        for (Player player : playersBets.keySet()) {
+            Bet bet = playersBets.get(player);
             if (bet.getScore() == winningScore) {
                 player.win(bet.getAmount() * 6);
             }
