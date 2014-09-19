@@ -1,8 +1,6 @@
 package com.cft.casino.domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 public class RollDiceGame {
     private HashMap<Player, Bet> playersBets = new HashMap<>();
@@ -17,7 +15,7 @@ public class RollDiceGame {
     }
 
     public void play(IDice dice) throws CasinoGameException {
-        int winningScore = roll(dice);
+        int winningScore = dice.roll();
 
         for (Player player : playersBets.keySet()) {
             Bet bet = playersBets.get(player);
@@ -30,10 +28,6 @@ public class RollDiceGame {
             }
         }
         playersBets.clear();
-    }
-
-    private int roll(IDice dice) {
-        return dice.roll();
     }
 
     public void leave(Player player) throws CasinoGameException {
