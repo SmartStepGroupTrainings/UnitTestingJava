@@ -3,6 +3,7 @@ package com.cft.casino.domain;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 
 public class GameTests {
 
@@ -13,10 +14,10 @@ public class GameTests {
         looser.joins(game);
         looser.buyChips(100);
         looser.bet(new Bet(25, 1));
-        DiceStub dice = new DiceStub();
-        dice.willAlwaysRoll(6);
+        IDice diceStub = mock(IDice.class);
+        when(diceStub.roll()).thenReturn(6);
 
-        game.play(dice);
+        game.play(diceStub);
 
         assertEquals(100 - 25, looser.getAvailableChips());
     }
@@ -26,16 +27,18 @@ public class GameTests {
         int WINNING_SCORE = 1;
         RollDiceGame game = new RollDiceGame();
         Player winner = new Player();
-        winner.joins(game);
+        Player winnerSpy = spy(winner);
+        winnerSpy.joins(game);
         int BET_AMOUNT = 100;
-        winner.buyChips(1000);
-        winner.bet(new Bet(BET_AMOUNT, WINNING_SCORE));
-        DiceStub dice = new DiceStub();
-        dice.willAlwaysRoll(WINNING_SCORE);
+        winnerSpy.buyChips(1000);
+        winnerSpy.bet(new Bet(BET_AMOUNT, WINNING_SCORE));
+        IDice diceStub = mock(IDice.class);
+        when(diceStub.roll()).thenReturn(WINNING_SCORE);
 
-        game.play(dice);
+        game.play(diceStub);
 
-        assertEquals(1000 - BET_AMOUNT + 6 * BET_AMOUNT, winner.getAvailableChips());
+        verify(winnerSpy, never()).lose();
+        verify(winnerSpy, times(1)).win(6 * BET_AMOUNT);
     }
 }
 
