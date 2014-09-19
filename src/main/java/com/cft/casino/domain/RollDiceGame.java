@@ -20,7 +20,7 @@ public class RollDiceGame {
         for (Player player : playersBets.keySet()) {
             Bet bet = playersBets.get(player);
             if (bet.getScore() == winningScore) {
-                player.win(bet.getAmount() * 6);
+                player.win(bet.getAmount() * WinningFactorService.calculateWinningFactor(winningScore));
             }
             else {
                 player.lose();
