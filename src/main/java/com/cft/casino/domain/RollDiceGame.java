@@ -20,7 +20,7 @@ public class RollDiceGame {
         for (Player player : playersBets.keySet()) {
             Bet bet = playersBets.get(player);
             if (bet.getScore() == winningScore) {
-                player.win(bet.getAmount() * WinningFactorService.calculateWinningFactor(winningScore));
+                player.win(bet.getAmount() * createWinningFactorService().calculateWinningFactorInstance(winningScore));
             }
             else {
                 player.lose();
@@ -28,6 +28,10 @@ public class RollDiceGame {
             }
         }
         playersBets.clear();
+    }
+
+    protected WinningFactorService createWinningFactorService() {
+        return new WinningFactorService();
     }
 
     public void leave(Player player) throws CasinoGameException {

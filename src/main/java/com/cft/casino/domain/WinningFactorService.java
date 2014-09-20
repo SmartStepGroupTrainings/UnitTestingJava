@@ -1,6 +1,6 @@
 package com.cft.casino.domain;
 
-public final class WinningFactorService {
+public class WinningFactorService {
     public static int calculateWinningFactor(int score) {
         switch(score) {
             case 4:
@@ -10,5 +10,9 @@ public final class WinningFactorService {
             default:
                 return 6;
         }
+    }
+
+    public int calculateWinningFactorInstance(int score) {
+        return WinningFactorService.calculateWinningFactor(score);
     }
 }

@@ -40,5 +40,25 @@ public class GameTests {
         verify(winnerSpy, never()).lose();
         verify(winnerSpy, times(1)).win(6 * BET_AMOUNT);
     }
+
+
+    @Test
+    public void run_winner_winsHisBetWithWinningFactor() throws Exception {
+        int WINNING_SCORE = 1;
+        int WINNING_FACTOR = 10;
+        RollDiceGameWithWinningFactorServiceStub game = new RollDiceGameWithWinningFactorServiceStub();
+        game.WINNING_FACTOR = WINNING_FACTOR;
+        Player winner = new Player();
+        winner.joins(game);
+        int BET_AMOUNT = 100;
+        winner.buyChips(1000);
+        winner.bet(new Bet(BET_AMOUNT, WINNING_SCORE));
+        IDice diceStub = mock(IDice.class);
+        when(diceStub.roll()).thenReturn(WINNING_SCORE);
+
+        game.play(diceStub);
+
+        assertEquals(1000 - BET_AMOUNT + BET_AMOUNT * WINNING_FACTOR, winner.getAvailableChips());
+    }
 }
 
