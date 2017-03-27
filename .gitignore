@@ -30,6 +30,7 @@ _ReSharper*/
 
 *.opensdf
 
+.idea/
 .idea/.name
 .idea/libraries/
 .idea/workspace.xml
