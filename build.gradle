@@ -9,9 +9,9 @@ repositories {
     jcenter()
     mavenCentral()
 
-//    flatDir {
-//        dirs 'dependencies'
-//    }
+    flatDir {
+        dirs 'dependencies'
+    }
 }
 
 dependencies {
