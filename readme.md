@@ -1,2 +1,2 @@
-# TDD
-Задания к воркшопу "Unit testing & TDD"
+# Workshop - Unit Testing & TDD
+
