@@ -3,13 +3,7 @@ package com.ssg.casino.domain;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class PlayerTest {
-    @Test
-    public void test() {
-        assertEquals(1, 1);
-    }
 
     @Test
     public void PlayerShouldBuyChips() throws CasinoGameException {
@@ -19,14 +13,14 @@ public class PlayerTest {
     }
 
     @Test
-    public void PlayerShouldJoinToGame() throws CasinoGameException {
+    public void PlayerShouldJoinIntoGame() throws CasinoGameException {
         Player player = new Player();
         player.joins(new RollDiceGame());
         Assert.assertNotNull(player.activeGame());
     }
 
     @Test(expected = NullPointerException.class)
-    public void PlayerShouldLeaveFromGame() throws CasinoGameException {
+    public void PlayerNotShouldLeaveGameIfHasNotStarted() throws CasinoGameException {
         Player player = new Player();
         player.leave();
         Assert.assertNull(player.activeGame());
