@@ -25,6 +25,10 @@ public class PlayerTest1 {
         return newPlayer;
     }
 
+    private Bet newBetByAmount(int amount) {
+        return new Bet(amount, 5);
+    }
+
 
     @Test(expected = CasinoGameException.class)
     public void joins_ActivePlayer_ThrowException() throws CasinoGameException {
@@ -52,8 +56,8 @@ public class PlayerTest1 {
     }
 
     @Test
-    public void buy_PositiveChips_isOk() throws CasinoGameException {
-        Player player = new Player();
+    public void buy_PositiveChips_Successful() throws CasinoGameException {
+        Player player = newPlayer();
 
         player.buy(10);
 
@@ -62,18 +66,17 @@ public class PlayerTest1 {
 
     @Test(expected = CasinoGameException.class)
     public void buy_NegativeChips_ThrowException() throws CasinoGameException {
-        Player player = new Player();
+        Player player = newPlayer();
 
         player.buy(-10);
     }
 
     @Test
-    public void bet_ChipsAmountLessThanActivePlayerHas() throws CasinoGameException {
+    public void bet_ChipsAmountLessThanActivePlayerHas_Successful() throws CasinoGameException {
         Player activePlayer = newActivePlayer();
         activePlayer.buy(12);
-        Bet bet = new Bet(5, 5);
 
-        activePlayer.bet(bet);
+        activePlayer.bet(newBetByAmount(5));
 
         assertEquals(12-5, activePlayer.getAvailableChips());
     }
