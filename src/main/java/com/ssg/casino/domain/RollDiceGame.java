@@ -5,14 +5,22 @@ import java.util.Random;
 
 public class RollDiceGame {
     private HashMap<Player, Bet> playersBets = new HashMap<Player, Bet>();
+    private IDice dice;
+
+    public RollDiceGame() {
+    }
+
+    public RollDiceGame(IDice dice) {
+        this.dice = dice;
+    }
+
 
     public void addBet(Player player, Bet bet) {
         playersBets.put(player, bet);
     }
 
     public void play() throws CasinoGameException {
-        Random random = new Random();
-        int winningScore = random.nextInt(6) + 1;
+        int winningScore = dice.roll();
 
         for (Player player : playersBets.keySet()) {
             Bet bet = playersBets.get(player);

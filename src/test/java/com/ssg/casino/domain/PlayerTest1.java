@@ -9,25 +9,9 @@ import static org.junit.Assert.assertNull;
 /**
  * Created by ostkav15 22.05.18
  **/
-public class PlayerTest1 {
+public class PlayerTest1 extends BaseTest {
 
-    private Player newPlayer() {
-        return new Player();
-    }
 
-    private RollDiceGame newRollDiceGame() {
-        return  new RollDiceGame();
-    }
-
-    private Player newActivePlayer() throws CasinoGameException {
-        Player newPlayer = newPlayer();
-        newPlayer.joins(newRollDiceGame());
-        return newPlayer;
-    }
-
-    private Bet newBetByAmount(int amount) {
-        return new Bet(amount, 5);
-    }
 
 
     @Test(expected = CasinoGameException.class)
