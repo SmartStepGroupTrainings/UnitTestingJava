@@ -10,9 +10,17 @@ public class RollDiceGame {
         playersBets.put(player, bet);
     }
 
+    private Dice dice;
+    RollDiceGame(){
+        this.dice = new DiceImpl();
+    }
+
+    RollDiceGame(Dice dice){
+        this.dice = dice;
+    }
+
     public void play() throws CasinoGameException {
-        Random random = new Random();
-        int winningScore = random.nextInt(6) + 1;
+        int winningScore = dice.getDice();
 
         for (Player player : playersBets.keySet()) {
             Bet bet = playersBets.get(player);
