@@ -1,10 +1,19 @@
 package com.ssg.casino.domain;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class WhenPlayerJoinsGame {
+
+    RollDiceGame anotherGame = null;
+
+
+    @Before
+    public void setUp() throws Exception {
+        anotherGame = newGame();
+    }
 
 
     private Player newActivePlayer() throws CasinoGameException {
@@ -54,8 +63,6 @@ public class WhenPlayerJoinsGame {
     @Test(expected = CasinoGameException.class)
     public void heCannotJoinTwoGamesAtTheSameTime() throws CasinoGameException {
         Player activePlayer = newActivePlayer();
-
-        RollDiceGame anotherGame = newGame();
 
         activePlayer.joins(anotherGame);
     }
