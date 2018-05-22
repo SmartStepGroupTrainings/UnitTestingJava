@@ -22,19 +22,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void init_ForNewPlayer_ActiveGameIsNull() {
-        assertNull(player.activeGame());
-    }
-
-
-    @Test
-    public void init_ForNewPlayer_ChipsCountIsZero() {
-        int expectedInitChipsCount = 0;
-        assertEquals(expectedInitChipsCount, player.getAvailableChips());
-    }
-
-    @Test
-    public void joins_PlayerHasGame_GameIsNotNull() throws CasinoGameException {
+    public void joins_NewPlayerJoinToGame_GameIsNotEmpty() throws CasinoGameException {
         player.joins(new RollDiceGame());
 
         assertNotNull(player.activeGame());
@@ -43,34 +31,37 @@ public class PlayerTest {
     @Test
     public void buy_TenChips_HasTenChips() throws CasinoGameException {
         player.buy(10);
+
         assertEquals(10,player.getAvailableChips());
     }
 
     @Test(expected = CasinoGameException.class)
     public void buy_NegativeChipsCount_ThrowsException() throws CasinoGameException {
-        player.buy(-10);
+        player.buy(-1);
     }
 
     @Test(expected = CasinoGameException.class)
-    public void joins_GameIsNull_ThrowsException() throws CasinoGameException {
+    public void joins_PlayerAlreadyHasGame_ThrowsException() throws CasinoGameException {
         RollDiceGame game = new RollDiceGame();
-
         player.joins(game);
+
         player.joins(game);
     }
 
     @Test
-    public void leave_IsInGame_GameIsNull() throws CasinoGameException {
+    public void leave_PlayerIsInGame_GameIsNull() throws CasinoGameException {
         RollDiceGame game = new RollDiceGame();
         player.joins(game);
+
         player.leave();
     }
 
     @Ignore
     @Test(expected = CasinoGameException.class)
-    public void leave_IsNotInGame_ThrowsException() throws CasinoGameException {
+    public void leave_PlayerIsNotInGame_ThrowsException() throws CasinoGameException {
         RollDiceGame game = null;
         player.joins(game);
+
         player.leave();
     }
 }
