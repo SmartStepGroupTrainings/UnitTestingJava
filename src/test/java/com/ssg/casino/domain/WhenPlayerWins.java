@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class WhenPlayerWins extends BaseTest {
 
     @Test
-    public void increaseSixAmountChips() throws CasinoGameException {
+    public void increaseInSixTimesAmountChips() throws CasinoGameException {
         RollDiceGame game = newFakeGameForWin();
         Player winner = activePlayer(game, 10);
         winner.bet(doBet(10));
