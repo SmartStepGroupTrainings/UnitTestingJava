@@ -10,28 +10,6 @@ import  static org.mockito.Mockito.*;
  **/
 public class WhenPlayerPlays extends BaseTest {
 
-    private RollDiceGame newRollDiceGameWithKnownScore() {
-        Dice dice = mock(Dice.class);
-        when(dice.roll()).thenReturn(1);
-
-        return new RollDiceGame(dice);
-    }
-
-    private Player newPlayerWithChipsJoinsGameAndBetForScore(int chipsAmount, int betScore, RollDiceGame game) throws CasinoGameException {
-        Player newPlayer = newPlayer();
-        newPlayer.buy(chipsAmount);
-        newPlayer.joins(game);
-        newPlayer.bet(new Bet(chipsAmount, betScore));
-        return newPlayer;
-    }
-
-    private Player playerWinGame(RollDiceGame game) throws CasinoGameException {
-        return newPlayerWithChipsJoinsGameAndBetForScore(10, 1, game);
-    }
-
-    private Player playerLoseGame(RollDiceGame game) throws CasinoGameException {
-        return newPlayerWithChipsJoinsGameAndBetForScore(10, 1 + 1, game);
-    }
 
     @Test
     public void heWinTheGameWithTenChipsBetAndGetSixBets() throws CasinoGameException {
