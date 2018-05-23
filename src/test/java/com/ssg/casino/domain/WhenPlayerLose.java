@@ -25,8 +25,8 @@ public class WhenPlayerLose {
         player.buy(allChips);
 
         int winningScore = 1;
-        RollDiceGame alwaysWinningGame = newGame(winningScore+1);
-        player.joins(alwaysWinningGame);
+        RollDiceGame alwaysLosingGame = newGame(winningScore+1);
+        player.joins(alwaysLosingGame);
 
         Bet bet = new Bet(allChips, winningScore);
         player.bet(bet);
