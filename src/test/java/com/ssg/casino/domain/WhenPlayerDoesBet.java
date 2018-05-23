@@ -18,20 +18,10 @@ public class WhenPlayerDoesBet {
 
     @Test(expected = CasinoGameException.class)
     public void failIfPlayerBetsMoreChipsThanHeHas() throws CasinoGameException {
-
         Player player = new Player();
         player.joins(new RollDiceGame());
         player.buy(10);
 
-        try {
-            player.bet(new Bet(10 + 1, 1));
-        } catch (CasinoGameException e) {
-            assertNotNull(e);
-            return;
-        }
-
-        assertTrue(false);
+        player.bet(new Bet(10 + 1, 1));
     }
-
-
 }
