@@ -48,7 +48,11 @@ public class WhenPlayerPlays extends BaseTest {
 
     @Test
     public void increaseInSixTimesAmountChips() throws CasinoGameException {
-        RollDiceGame играВсегдаСПобедой = newGameForWin();
+//        RollDiceGame играВсегдаСПобедой = newGameForWin();
+        RollDiceGame играВсегдаСПобедой = создатель
+                .дайРодителяИгры()
+                    .всегдаСПобедой()
+                    .родить();
         Player winner = создатель
                 .дайРодителяИгрока()
                     .вИгре(играВсегдаСПобедой)
