@@ -11,10 +11,32 @@ import  static org.mockito.Mockito.*;
 public class WhenPlayerPlays extends BaseTest {
 
 
+    private ObjectFather create = new ObjectFather();
+
     @Test
     public void heWinTheGameWithTenChipsBetAndGetSixBets() throws CasinoGameException {
         RollDiceGame winGame = newRollDiceGameWithKnownScore();
         Player winner = playerWinGame(winGame);
+
+        winGame.play();
+
+        assertEquals(10 * 6, winner.getAvailableChips());
+    }
+
+    @Test
+    public void heWinTheGameWithTenChipsBetAndGetSixBetsDSL() throws CasinoGameException {
+
+
+        RollDiceGame winGame = create.game()
+                .withDice(new Dice())
+                .please();
+
+        Player winner = create.activePlayer(winGame)
+                .withChips(10)
+                .withBet(10)
+                .onScore(1)
+                .please();
+
 
         winGame.play();
 
