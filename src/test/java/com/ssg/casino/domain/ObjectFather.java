@@ -8,7 +8,8 @@ public class ObjectFather {
         return new GameBuilder();
     }
 
-    public PlayerBuilder activePlayer(RollDiceGame winGame) {
+
+    public PlayerBuilder playerInGame(RollDiceGame winGame) {
         return new PlayerBuilder(winGame);
     }
 }

@@ -2,6 +2,7 @@ package com.ssg.casino.domain;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 import  static org.mockito.Mockito.*;
 
@@ -12,6 +13,22 @@ public class WhenPlayerPlays extends BaseTest {
 
 
     private ObjectFather create = new ObjectFather();
+    private RollDiceGame winGame;
+    private RollDiceGame loseGame;
+
+    @Before
+    public void init() {
+        Dice dice = mock(Dice.class);
+        when(dice.roll()).thenReturn(3, 1, 2, 1);
+
+        this.winGame = create.game()
+                .withDice(dice)
+                .please();
+
+        this.loseGame = create.game()
+                .withDice(dice)
+                .please();
+    }
 
     @Test
     public void heWinTheGameWithTenChipsBetAndGetSixBets() throws CasinoGameException {
@@ -24,29 +41,27 @@ public class WhenPlayerPlays extends BaseTest {
     }
 
     @Test
-    public void heWinTheGameWithTenChipsBetAndGetSixBetsDSL() throws CasinoGameException {
+    public void winnerGetsSixBets() throws CasinoGameException {
 
-
-        RollDiceGame winGame = create.game()
-                .withDice(new Dice())
-                .please();
-
-        Player winner = create.activePlayer(winGame)
-                .withChips(10)
-                .withBet(10)
-                .onScore(1)
+        Player winner = create.playerInGame(winGame)
+                .withChips(12)
+                .withAllChipsBet()
+                .onWinningScore()
                 .please();
 
 
         winGame.play();
 
-        assertEquals(10 * 6, winner.getAvailableChips());
+        assertEquals( 12 * 6, winner.getAvailableChips());
     }
 
     @Test
     public void heLoseTheGameWithTenChipsBetAndLoseAllChips() throws CasinoGameException {
-        RollDiceGame loseGame = newRollDiceGameWithKnownScore();
-        Player looser = playerLoseGame(loseGame);
+        Player looser = create.playerInGame(loseGame)
+                .withChips(12)
+                .withAllChipsBet()
+                .onLoosingScore()
+                .please();
 
         loseGame.play();
 

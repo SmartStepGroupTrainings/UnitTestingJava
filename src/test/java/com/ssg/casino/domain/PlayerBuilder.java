@@ -28,6 +28,21 @@ public class PlayerBuilder {
         return this;
     }
 
+    public PlayerBuilder withAllChipsBet() {
+        this.betAmount = chipsAmount;
+        return this;
+    }
+
+    public PlayerBuilder onWinningScore() {
+        this.betScore = 1;
+        return this;
+    }
+
+    public PlayerBuilder onLoosingScore() {
+        this.betScore = 2;
+        return this;
+    }
+
     public Player please() throws CasinoGameException {
         Player player = new Player();
         player.buy(chipsAmount);
