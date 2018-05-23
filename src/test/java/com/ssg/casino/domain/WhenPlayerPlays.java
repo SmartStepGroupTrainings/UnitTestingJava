@@ -8,23 +8,25 @@ public class WhenPlayerPlays extends BaseTest {
 
     @Test
     public void increaseInSixTimesAmountChips() throws CasinoGameException {
-        RollDiceGame game = newGameForWin();
-        Player winner = activePlayer(game, 100);
+        RollDiceGame alwaysWinnerGame = newGameForWin();
+        Player winner = activeReachPlayer(alwaysWinnerGame);
         winner.bet(doBet(10));
+        int oldChips = winner.getAvailableChips();
 
-        game.play();
+        alwaysWinnerGame.play();
 
-        assertEquals(100 - 10 + 10 * 6, winner.getAvailableChips());
+        assertEquals(oldChips - 10 + 10 * 6, winner.getAvailableChips());
     }
     
     @Test
     public void notChangeAmountChipsAfterFailGame() throws CasinoGameException {
-        RollDiceGame game = newGameForLose();
-        Player looser = activePlayer(game, 100);
+        RollDiceGame alwaysLoosingGame = newGameForLose();
+        Player looser = activeReachPlayer(alwaysLoosingGame);
         looser.bet(doBet(10));
+        int oldChips = looser.getAvailableChips();
 
-        game.play();
+        alwaysLoosingGame.play();
 
-        assertEquals(100 - 10, looser.getAvailableChips());
+        assertEquals(oldChips - 10, looser.getAvailableChips());
     }
 }

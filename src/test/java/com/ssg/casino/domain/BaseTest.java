@@ -24,10 +24,10 @@ public class BaseTest {
         return new RollDiceGame(dice);
     }
 
-    protected Player activePlayer(RollDiceGame game, int amountChips) throws CasinoGameException {
+    protected Player activeReachPlayer(RollDiceGame game) throws CasinoGameException {
         Player newPlayer = newPlayer();
         newPlayer.joins(game);
-        newPlayer.buy(amountChips);
+        newPlayer.buy(Integer.MAX_VALUE);
         return newPlayer;
     }
 
@@ -35,7 +35,7 @@ public class BaseTest {
         return new Bet(amountChips, WIN_SCORE);
     }
 
-    protected Player activePlayer() throws CasinoGameException {
+    protected Player activeReachPlayer() throws CasinoGameException {
         Player player = newPlayer();
         player.joins(newRollDiceGame());
 

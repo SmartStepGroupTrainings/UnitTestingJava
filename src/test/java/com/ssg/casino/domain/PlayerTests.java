@@ -12,7 +12,7 @@ public class PlayerTests extends BaseTest {
 
     @Test
     public void bet_newPlayerInGameWithChips_decreaseChipsAmountOnNumberOfBet() throws CasinoGameException {
-        Player activePlayer = activePlayer();
+        Player activePlayer = activeReachPlayer();
         activePlayer.buy(10);
 
         activePlayer.bet(new Bet(2, 1));
@@ -23,7 +23,7 @@ public class PlayerTests extends BaseTest {
     @Test
     public void betMoreChipsThanHeHas_activePlayerWithChips_throwException() throws CasinoGameException {
 
-        Player activePlayer = activePlayer();
+        Player activePlayer = activeReachPlayer();
         activePlayer.buy(10);
 
         expectedException.expect(CasinoGameException.class);
