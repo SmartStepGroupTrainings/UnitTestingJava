@@ -21,7 +21,12 @@ public class RollDiceGame {
     }
 
     public void play() throws CasinoGameException {
-        int winningScore = dice.roll();
+        int rollTimes = dice.roll();
+
+        int winningScore = 0;
+        for (int count = 0; count < rollTimes; count++) {
+            winningScore = dice.roll();
+        }
 
         for (Player player : playersBets.keySet()) {
             Bet bet = playersBets.get(player);

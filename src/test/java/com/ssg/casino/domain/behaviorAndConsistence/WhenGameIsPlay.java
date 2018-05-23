@@ -8,16 +8,21 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.spy;
 
-public class WhenSmbdPlayGame {
+public class WhenGameIsPlay {
 
     @Test
     public void diceIsRolledOnce() throws CasinoGameException {
         IDice dice = mock(IDice.class);
-        RollDiceGame diceGame = new RollDiceGame(dice);
+        when(dice.roll()).thenReturn(3).thenReturn(1).thenReturn(3).thenReturn(6);
+        RollDiceGame diceGame = newDiceGame(dice);
 
         diceGame.play();
 
-        verify(dice, times(1)).roll();
+        verify(dice, times(4)).roll();
+    }
+
+    private RollDiceGame newDiceGame(IDice dice) {
+        return new RollDiceGame(dice);
     }
 
     @Test
@@ -26,7 +31,6 @@ public class WhenSmbdPlayGame {
 
         Player firstWinner = newWinnerPlayer(diceGame);
         Player secondWinner = newWinnerPlayer(diceGame);
-        Player looser = newLooserPlayer(diceGame);
 
 
         diceGame.play();
@@ -34,7 +38,22 @@ public class WhenSmbdPlayGame {
 
         verify(firstWinner, times(1)).win(anyInt());
         verify(secondWinner, times(1)).win(anyInt());
-        verify(looser, times(0)).win(anyInt());
+
+    }
+
+    @Test
+    public void noCallPlayerWinForAllLoosers() throws CasinoGameException {
+        RollDiceGame diceGame = getRollDiceGame();
+
+        Player firstLooser = newLooserPlayer(diceGame);
+        Player secondLooser = newLooserPlayer(diceGame);
+
+
+        diceGame.play();
+
+
+        verify(firstLooser, times(0)).win(anyInt());
+        verify(secondLooser, times(0)).win(anyInt());
 
     }
 
