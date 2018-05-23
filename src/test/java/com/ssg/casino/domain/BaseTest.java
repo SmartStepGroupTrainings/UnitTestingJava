@@ -1,5 +1,8 @@
 package com.ssg.casino.domain;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 public class BaseTest {
     private static int WIN_SCORE = 1;
     private static int LOSE_SCORE = 2;
@@ -13,21 +16,21 @@ public class BaseTest {
     }
 
     protected RollDiceGame newGameForWin() {
-        Dice dice = new DiceFake();
-        ((DiceFake) dice).score = WIN_SCORE;
+        Dice dice = mock(Dice.class);
+        when(dice.getDice()).thenReturn(WIN_SCORE);
         return new RollDiceGame(dice);
     }
 
     protected RollDiceGame newGameForLose() {
-        Dice dice = new DiceFake();
-        ((DiceFake) dice).score = LOSE_SCORE;
+        Dice dice = mock(Dice.class);
+        when(dice.getDice()).thenReturn(LOSE_SCORE);
         return new RollDiceGame(dice);
     }
 
     protected Player activeReachPlayer(RollDiceGame game) throws CasinoGameException {
         Player newPlayer = newPlayer();
         newPlayer.joins(game);
-        newPlayer.buy(Integer.MAX_VALUE);
+        newPlayer.buy(100000);
         return newPlayer;
     }
 
