@@ -20,7 +20,14 @@ public class RollDiceGame {
     }
 
     public void play() throws CasinoGameException {
-        int winningScore = dice.roll();
+        int rollsCount = dice.roll();
+        int winningScore = 0;
+        for (int i = 0; i < rollsCount; i++) {
+            int rollsScore = dice.roll();
+            if (i == rollsCount - 1) {
+                winningScore = rollsScore;
+            }
+        }
 
         for (Player player : playersBets.keySet()) {
             Bet bet = playersBets.get(player);

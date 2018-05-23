@@ -29,7 +29,7 @@ public abstract class BaseTest {
 
     protected RollDiceGame newRollDiceGameWithKnownScore() {
         Dice dice = mock(Dice.class);
-        when(dice.roll()).thenReturn(1);
+        when(dice.roll()).thenReturn(3, 1, 2, 1);
 
         return new RollDiceGame(dice);
     }

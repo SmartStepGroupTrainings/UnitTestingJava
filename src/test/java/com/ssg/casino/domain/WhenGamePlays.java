@@ -13,17 +13,17 @@ import static org.mockito.Mockito.verify;
 public class WhenGamePlays extends BaseTest {
 
     @Test
-    public void diceRollOneTime() throws CasinoGameException {
-        Dice dice = mock(Dice.class);
+    public void diceRollsOncePerGame() throws CasinoGameException {
+        Dice dice = spy(new Dice());
         RollDiceGame game = new RollDiceGame(dice);
 
         game.play();
 
-        verify(dice, times(1)).roll();
+        verify(dice, times(3)).roll();
     }
 
     @Test
-    public void allWinnersCallWin() throws CasinoGameException {
+    public void gameCallWinForAllWinnersOnce() throws CasinoGameException {
         RollDiceGame winGame = newRollDiceGameWithKnownScore();
         Player winner1 = playerWinGame(winGame);
         Player winner2 = playerWinGame(winGame);
