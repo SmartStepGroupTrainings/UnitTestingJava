@@ -10,7 +10,7 @@ public class WhenPlayerWins extends BaseTest {
     public void increaseInSixTimesAmountChips() throws CasinoGameException {
         RollDiceGame game = newFakeGameForWin();
         Player winner = activePlayer(game, 10);
-        winner.bet(doBet(10));
+        winner.bet(doBetForWin(10));
 
         game.play();
 

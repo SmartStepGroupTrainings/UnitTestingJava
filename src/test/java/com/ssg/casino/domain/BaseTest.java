@@ -24,7 +24,7 @@ public class BaseTest {
         return newPlayer;
     }
 
-    protected Bet doBet(int amountChips) {
+    protected Bet doBetForWin(int amountChips) {
         return new Bet(amountChips, WIN_SCORE);
     }
 
