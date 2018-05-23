@@ -7,22 +7,22 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class WhenPlayerLose {
+public class WhenPlayerLoose {
 
     @Test
-    public void loserLoseTheBet() throws CasinoGameException {
-        Player loser = loserWhoBetAllChips();
+    public void loserLooseTheBet() throws CasinoGameException {
+        Player looser = looserWhoBetAllChips();
 
-        loser.activeGame().play();
+        looser.activeGame().play();
 
-        assertEquals(0, loser.getAvailableChips());
+        assertEquals(0, looser.getAvailableChips());
     }
 
     private Player newPlayer() {
         return new Player();
     }
 
-    private Player loserWhoBetAllChips() throws CasinoGameException {
+    private Player looserWhoBetAllChips() throws CasinoGameException {
         int allChips = 10;
         Player player = newPlayer();
         player.buy(allChips);

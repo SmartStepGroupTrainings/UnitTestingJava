@@ -1,37 +1,35 @@
-package com.ssg.casino.domain.forMockito;
+package com.ssg.casino.domain.behaviorAndConsistence;
 
 import com.ssg.casino.domain.*;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnit;
-
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class WhenPlayerWins {
+public class WhenSmbdPlayGame {
 
     @Test
-    public void winnerGetSixBets() throws CasinoGameException {
-        Player winner = winnerWhoBetAllChips(10);
+    public void loserLooseTheBet() throws CasinoGameException {
+        Player looser = looserWhoBetAllChips();
 
-        winner.activeGame().play();
+        looser.activeGame().play();
 
-        assertEquals(10 * 6, winner.getAvailableChips());
+        assertEquals(0, looser.getAvailableChips());
     }
 
     private Player newPlayer() {
         return new Player();
     }
 
-    private Player winnerWhoBetAllChips(int allChips) throws CasinoGameException {
+    private Player looserWhoBetAllChips() throws CasinoGameException {
+        int allChips = 10;
         Player player = newPlayer();
         player.buy(allChips);
 
         int winningScore = 1;
-        RollDiceGame alwaysWinningGame = newGame(winningScore);
-        player.joins(alwaysWinningGame);
+        RollDiceGame alwaysLosingGame = newGame(winningScore + 1);
+        player.joins(alwaysLosingGame);
 
         Bet bet = new Bet(allChips, winningScore);
         player.bet(bet);
