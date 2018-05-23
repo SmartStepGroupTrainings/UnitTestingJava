@@ -3,18 +3,18 @@ package com.ssg.casino.domain;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+import  static org.mockito.Mockito.*;
 
 /**
  * Created by ostkav15 22.05.18
  **/
 public class WhenPlayerPlays extends BaseTest {
 
-    private RollDiceGame newRollDiceGameWithKnownScore(final int winsScore) {
-        return new RollDiceGame(new IDice() {
-            public int roll() {
-                return winsScore;
-            }
-        });
+    private RollDiceGame newRollDiceGameWithKnownScore() {
+        Dice dice = mock(Dice.class);
+        when(dice.roll()).thenReturn(1);
+
+        return new RollDiceGame(dice);
     }
 
     private Player newPlayerWithChipsJoinsGameAndBetForScore(int chipsAmount, int betScore, RollDiceGame game) throws CasinoGameException {
@@ -25,23 +25,31 @@ public class WhenPlayerPlays extends BaseTest {
         return newPlayer;
     }
 
-    @Test
-    public void heWinTheGameWithTenChipsBet() throws CasinoGameException {
-        RollDiceGame game = newRollDiceGameWithKnownScore(1);
-        Player newPlayer = newPlayerWithChipsJoinsGameAndBetForScore(10, 1, game);
+    private Player playerWinGame(RollDiceGame game) throws CasinoGameException {
+        return newPlayerWithChipsJoinsGameAndBetForScore(10, 1, game);
+    }
 
-        game.play();
-
-        assertEquals(10*6, newPlayer.getAvailableChips());
+    private Player playerLoseGame(RollDiceGame game) throws CasinoGameException {
+        return newPlayerWithChipsJoinsGameAndBetForScore(10, 1 + 1, game);
     }
 
     @Test
-    public void heLoseTheGameWithTenChipsBet() throws CasinoGameException {
-        RollDiceGame game = newRollDiceGameWithKnownScore(2);
-        Player newPlayer = newPlayerWithChipsJoinsGameAndBetForScore(10, 2+1, game);
+    public void heWinTheGameWithTenChipsBetAndGetSixBets() throws CasinoGameException {
+        RollDiceGame winGame = newRollDiceGameWithKnownScore();
+        Player winner = playerWinGame(winGame);
 
-        game.play();
+        winGame.play();
 
-        assertEquals(0, newPlayer.getAvailableChips());
+        assertEquals(10 * 6, winner.getAvailableChips());
+    }
+
+    @Test
+    public void heLoseTheGameWithTenChipsBetAndLoseAllChips() throws CasinoGameException {
+        RollDiceGame loseGame = newRollDiceGameWithKnownScore();
+        Player looser = playerLoseGame(loseGame);
+
+        loseGame.play();
+
+        assertEquals(0, looser.getAvailableChips());
     }
 }
