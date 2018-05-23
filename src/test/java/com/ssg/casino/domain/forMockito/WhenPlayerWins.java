@@ -1,8 +1,14 @@
-package com.ssg.casino.domain;
+package com.ssg.casino.domain.forMockito;
 
+import com.ssg.casino.domain.*;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnit;
 
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class WhenPlayerWins {
 
@@ -34,8 +40,8 @@ public class WhenPlayerWins {
     }
 
     private RollDiceGame newGame(int winningScore) {
-        DiceFake dice = new DiceFake();
-        dice.winningScore = winningScore;
+        IDice dice = mock(IDice.class);
+        when(dice.roll()).thenReturn(winningScore);
         RollDiceGame diceGame = new RollDiceGame(dice);
 
         return diceGame;
