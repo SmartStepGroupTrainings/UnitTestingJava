@@ -43,4 +43,13 @@ public class PlayerCan extends BaseTest {
 
         assertTrue(player.hasChips);
     }
+
+    @Test
+    public void makeBetInGame() {
+        Player player = newPlayer();
+
+        player.makeBet();
+
+        assertTrue(player.hadBet);
+    }
 }
