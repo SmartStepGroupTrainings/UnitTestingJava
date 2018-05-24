@@ -5,6 +5,7 @@ package com.ssg.casino.domain;
  **/
 public class Player {
     public boolean isInGame = false;
+    public boolean hasChips = false;
 
     public void join(Game game) throws PlayerAlreadyInGameException, GameIsFullException {
         if (isInGame) {
@@ -19,5 +20,10 @@ public class Player {
             throw new PlayerNotInGameException();
         }
         isInGame = false;
+    }
+
+
+    public void buy() {
+        this.hasChips = true;
     }
 }

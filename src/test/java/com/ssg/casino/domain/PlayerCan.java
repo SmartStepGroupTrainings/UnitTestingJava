@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by ostkav15 24.05.18
@@ -32,5 +33,14 @@ public class PlayerCan extends BaseTest {
         Player player = newPlayerInGame();
 
         player.join(new Game());
+    }
+
+    @Test
+    public void buyChipsFromCasino() {
+        Player player = newPlayer();
+
+        player.buy();
+
+        assertTrue(player.hasChips);
     }
 }
