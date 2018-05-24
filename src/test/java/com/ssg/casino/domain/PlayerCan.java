@@ -3,6 +3,7 @@ package com.ssg.casino.domain;
 import com.ssg.casino.domain.exceptions.CanNotAddNewPlayerToTheGameException;
 import com.ssg.casino.domain.exceptions.CanNotLeaveTheGameException;
 import com.ssg.casino.domain.exceptions.OnlyOneGameException;
+import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
@@ -11,6 +12,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 public class PlayerCan extends Base {
+
+    private ObjectFather creator = new ObjectFather();
+
+    private Game game;
+
+    @Before
+    public void setUp() {
+        game = new Game();
+
+    }
 
     @Test
     public void enterTheGame() throws OnlyOneGameException, CanNotAddNewPlayerToTheGameException {
@@ -45,13 +56,13 @@ public class PlayerCan extends Base {
 
     @Test
     public void doBetInGame() {
+        Player playerInGame = creator
+                .newPlayer()
+                .withGame(game)
+                .withChips(10)
+                .please();
 
-        Bet bet = new Bet();
-
-        Game game = new Game();
-
-        ObjectFather creator = new ObjectFather();
-        Player playerInGame = creator.newPlayer().withGame(game).withChips(10).withBet(bet).please();
+        playerInGame.doBet(new Bet());
 
 
         assertNotNull(playerInGame.bet);

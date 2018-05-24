@@ -32,4 +32,9 @@ public class Player {
     public void buyChips(int chips) {
         this.chips = chips;
     }
+
+    public void doBet(Bet bet) {
+        this.bet = bet;
+
+    }
 }
