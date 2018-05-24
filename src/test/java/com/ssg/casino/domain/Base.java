@@ -1,5 +1,6 @@
 package com.ssg.casino.domain;
 
+import com.ssg.casino.domain.exceptions.CanNotAddNewPlayerToTheGameException;
 import com.ssg.casino.domain.exceptions.OnlyOneGameException;
 
 public class Base {
@@ -8,9 +9,15 @@ public class Base {
         return new Player();
     }
 
-    protected Player newPlayerInGame() throws OnlyOneGameException {
+    protected Player newPlayerInSomeNewGame() throws OnlyOneGameException, CanNotAddNewPlayerToTheGameException {
         Player player = newPlayer();
         player.enter(new Game());
+        return player;
+    }
+
+    protected Player newPlayerInGame(Game game) throws OnlyOneGameException, CanNotAddNewPlayerToTheGameException {
+        Player player = newPlayer();
+        player.enter(game);
         return player;
     }
 }
