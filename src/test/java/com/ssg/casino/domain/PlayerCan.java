@@ -7,7 +7,7 @@ import static org.junit.Assert.assertFalse;
 
 public class PlayerCan extends TestBase {
     @Test
-    public void enterInGame() throws PlayerIsInGame {
+    public void enterInGame() throws PlayerIsInGameException {
         Player player = newPlayer();
 
         player.enter(newGame());
@@ -16,7 +16,7 @@ public class PlayerCan extends TestBase {
     }
 
     @Test
-    public void exitFromGame() throws PlayerIsNotInGame, PlayerIsInGame {
+    public void exitFromGame() throws PlayerIsNotInGameException, PlayerIsInGameException {
         Player player = newPlayerInGame();
 
         player.exit();
@@ -26,8 +26,8 @@ public class PlayerCan extends TestBase {
 
 
 
-    @Test(expected = PlayerIsInGame.class)
-    public void playOnlyOneGame() throws PlayerIsInGame {
+    @Test(expected = PlayerIsInGameException.class)
+    public void playOnlyOneGame() throws PlayerIsInGameException {
        Player player = newPlayerInGame();
 
        player.enter(newGame());

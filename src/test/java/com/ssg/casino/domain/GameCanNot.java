@@ -3,11 +3,12 @@ package com.ssg.casino.domain;
 import org.junit.Test;
 
 public class GameCanNot extends TestBase {
-    @Test(expected = GameIsFull.class)
-    public void allowMoreThenSixPlayers () throws GameIsFull {
-        Game game = newFullGame();
+    @Test(expected = GameIsFullException.class)
+    public void allowMoreThenSixPlayers () throws GameIsFullException {
+        Game fullGame = newFullGame();
+        Player seventhPlayer = newPlayer();
 
-        game.add(newPlayer());
+        fullGame.add(seventhPlayer);
     }
 
 }

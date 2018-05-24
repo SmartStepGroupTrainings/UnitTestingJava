@@ -3,18 +3,18 @@ package com.ssg.casino.domain;
 public class Player {
     public boolean isInGame = false;
 
-    public void enter(Game game) throws PlayerIsInGame {
+    public void enter(Game game) throws PlayerIsInGameException {
         if (isInGame)
-            throw new PlayerIsInGame();
+            throw new PlayerIsInGameException();
         isInGame = true;
 
     }
 
-    public void exit() throws PlayerIsNotInGame {
+    public void exit() throws PlayerIsNotInGameException {
         if (isInGame) {
             isInGame = false;
             return;
         }
-        throw new PlayerIsNotInGame();
+        throw new PlayerIsNotInGameException();
     }
 }
