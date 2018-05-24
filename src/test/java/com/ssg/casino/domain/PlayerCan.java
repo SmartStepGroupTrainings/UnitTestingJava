@@ -10,7 +10,7 @@ import static junit.framework.TestCase.assertTrue;
  **/
 public class PlayerCan extends BaseTest {
     @Test
-    public void joinGame() {
+    public void joinGame() throws PlayerAlreadyInGameException {
         Player player = newPlayer();
 
         player.join(new Game());
@@ -19,11 +19,18 @@ public class PlayerCan extends BaseTest {
     }
 
     @Test
-    public void leaveGame() throws PlayerNotInGameException {
+    public void leaveGame() throws PlayerNotInGameException, PlayerAlreadyInGameException {
         Player player = newPlayerInGame();
 
         player.leaveGame();
 
         assertFalse(player.isInGame);
+    }
+
+    @Test (expected = PlayerAlreadyInGameException.class)
+    public void joinOnlyOneGame() throws PlayerAlreadyInGameException {
+        Player player = newPlayerInGame();
+
+        player.join(new Game());
     }
 }
