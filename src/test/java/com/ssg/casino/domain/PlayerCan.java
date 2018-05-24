@@ -51,9 +51,9 @@ public class PlayerCan extends Base {
         Game game = new Game();
 
         ObjectFather creator = new ObjectFather();
-        Player playerInGame = creator.playerInGame(game).withBet(bet).please();
+        Player playerInGame = creator.newPlayer().withGame(game).withChips(10).withBet(bet).please();
 
-        
+
         assertNotNull(playerInGame.bet);
     }
 }
