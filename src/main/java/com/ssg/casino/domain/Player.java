@@ -6,6 +6,7 @@ import com.ssg.casino.domain.exceptions.OnlyOneGameException;
 
 public class Player {
     public boolean isInGame;
+    public int chips;
 
     public void enter(Game game) throws OnlyOneGameException, CanNotAddNewPlayerToTheGameException {
         if (isInGame) {
@@ -25,5 +26,9 @@ public class Player {
         }
 
         throw new CanNotLeaveTheGameException();
+    }
+
+    public void buyChips(int chips) {
+        this.chips = chips;
     }
 }
