@@ -1,22 +1,25 @@
 package com.ssg.casino.domain;
 
-import com.ssg.casino.domain.exceptions.CanNotAddNewPlayerToTheGameException;
+import com.ssg.casino.domain.exceptions.HasMaxPlayersCountException;
 import com.ssg.casino.domain.exceptions.CanNotLeaveTheGameException;
 import com.ssg.casino.domain.exceptions.NotEnoughChipsException;
 import com.ssg.casino.domain.exceptions.OnlyOneGameException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
     public boolean isInGame;
     public int chips;
-    public Bet bet;
+    public List<Bet> bets = new ArrayList<>();
 
-    public void enter(Game game) throws OnlyOneGameException, CanNotAddNewPlayerToTheGameException {
+    public void enter(Game game) throws OnlyOneGameException, HasMaxPlayersCountException {
         if (isInGame) {
             throw new OnlyOneGameException();
         }
         isInGame = true;
         if (game.playerCount + 1 > 6) {
-            throw new CanNotAddNewPlayerToTheGameException();
+            throw new HasMaxPlayersCountException();
         }
         game.playerCount++;
     }
@@ -40,6 +43,6 @@ public class Player {
             throw new NotEnoughChipsException();
         }
 
-        this.bet = bet;
+        this.bets.add(bet);
     }
 }

@@ -1,26 +1,26 @@
 package com.ssg.casino.domain;
 
+import com.ssg.casino.domain.exceptions.HasMaxPlayersCountException;
+import com.ssg.casino.domain.exceptions.OnlyOneGameException;
+
 public class PlayerBuilder {
 
 
-    private Bet bet;
     private Game game;
     private int chips;
 
-    public PlayerBuilder withBet(Bet bet) {
-        this.bet = bet;
-        return this;
-    }
 
     public PlayerBuilder withGame(Game game) {
         this.game = game;
         return this;
     }
 
-    public Player please() {
+    public Player please() throws OnlyOneGameException, HasMaxPlayersCountException {
         Player player = new Player();
+        player.enter(game);
+        player.buyChips(chips);
 
-        player.bet = this.bet;
+
         return player;
     }
 

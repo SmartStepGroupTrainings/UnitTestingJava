@@ -1,10 +1,9 @@
 package com.ssg.casino.domain;
 
-import com.ssg.casino.domain.exceptions.CanNotAddNewPlayerToTheGameException;
+import com.ssg.casino.domain.exceptions.HasMaxPlayersCountException;
 import com.ssg.casino.domain.exceptions.CanNotLeaveTheGameException;
 import com.ssg.casino.domain.exceptions.NotEnoughChipsException;
 import com.ssg.casino.domain.exceptions.OnlyOneGameException;
-import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
@@ -15,14 +14,14 @@ import static org.junit.Assert.assertNotNull;
 public class PlayerCan extends Base {
 
     @Test
-    public void enterTheGame() throws OnlyOneGameException, CanNotAddNewPlayerToTheGameException {
+    public void enterTheGame() throws OnlyOneGameException, HasMaxPlayersCountException {
         Player player = newPlayerInSomeNewGame();
 
         assertTrue(player.isInGame);
     }
 
     @Test
-    public void leaveTheGame() throws CanNotLeaveTheGameException, OnlyOneGameException, CanNotAddNewPlayerToTheGameException {
+    public void leaveTheGame() throws CanNotLeaveTheGameException, OnlyOneGameException, HasMaxPlayersCountException {
         Player player = newPlayerInSomeNewGame();
 
         player.leave();
@@ -31,7 +30,7 @@ public class PlayerCan extends Base {
     }
 
     @Test(expected = OnlyOneGameException.class)
-    public void enterOnlyOneGame() throws OnlyOneGameException, CanNotAddNewPlayerToTheGameException {
+    public void enterOnlyOneGame() throws OnlyOneGameException, HasMaxPlayersCountException {
         Player player = newPlayerInSomeNewGame();
         player.enter(new Game());
     }
@@ -46,7 +45,7 @@ public class PlayerCan extends Base {
     }
 
     @Test
-    public void doBetInGame() throws NotEnoughChipsException {
+    public void doBetInGame() throws NotEnoughChipsException, OnlyOneGameException, HasMaxPlayersCountException {
         Player playerInGame = creator
                 .newPlayer()
                 .withGame(game)
@@ -56,6 +55,20 @@ public class PlayerCan extends Base {
         playerInGame.doBet(new Bet());
 
 
-        assertNotNull(playerInGame.bet);
+        assertFalse(playerInGame.bets.isEmpty());
+    }
+
+    @Test
+    public void doBetsOnDifferentScore() throws NotEnoughChipsException, OnlyOneGameException, HasMaxPlayersCountException {
+        Player playerInGame = creator
+                .newPlayer()
+                .withGame(game)
+                .withChips(20)
+                .please();
+
+        playerInGame.doBet(new Bet(10, 2));
+        playerInGame.doBet(new Bet(10, 3));
+
+        assertTrue(playerInGame.bets.size() > 0);
     }
 }

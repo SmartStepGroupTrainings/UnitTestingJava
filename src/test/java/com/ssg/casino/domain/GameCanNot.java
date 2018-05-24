@@ -1,13 +1,13 @@
 package com.ssg.casino.domain;
 
-import com.ssg.casino.domain.exceptions.CanNotAddNewPlayerToTheGameException;
+import com.ssg.casino.domain.exceptions.HasMaxPlayersCountException;
 import com.ssg.casino.domain.exceptions.OnlyOneGameException;
 import org.junit.Test;
 
 public class GameCanNot extends Base{
 
-    @Test(expected = CanNotAddNewPlayerToTheGameException.class)
-    public void acceptMoreThanSixPlayers() throws OnlyOneGameException, CanNotAddNewPlayerToTheGameException {
+    @Test(expected = HasMaxPlayersCountException.class)
+    public void acceptMoreThanSixPlayers() throws OnlyOneGameException, HasMaxPlayersCountException {
 
         Game fullGameWithSixPlayers = fullGameWithSixPlayers();
         Player seventhPlayer = newPlayer();
@@ -16,7 +16,7 @@ public class GameCanNot extends Base{
 
     }
 
-    private Game fullGameWithSixPlayers() throws OnlyOneGameException, CanNotAddNewPlayerToTheGameException {
+    private Game fullGameWithSixPlayers() throws OnlyOneGameException, HasMaxPlayersCountException {
         Game game = new Game();
 
         for (int i = 0; i < 6; i++) {
