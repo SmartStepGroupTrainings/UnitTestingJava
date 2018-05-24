@@ -25,4 +25,11 @@ public class Player {
     public int getChips() {
         return 1;
     }
+
+    public void doBet() {
+    }
+
+    public Integer getBet() {
+        return 1;
+    }
 }

@@ -9,4 +9,5 @@ public class PlayerCanNot extends TestBase {
 
         player.exit();
     }
+
 }
