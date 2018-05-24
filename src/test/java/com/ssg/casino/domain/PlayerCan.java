@@ -10,7 +10,7 @@ import static junit.framework.TestCase.assertTrue;
  **/
 public class PlayerCan extends BaseTest {
     @Test
-    public void joinGame() throws PlayerAlreadyInGameException {
+    public void joinGame() throws PlayerAlreadyInGameException, GameIsFullException {
         Player player = newPlayer();
 
         player.join(new Game());
@@ -19,7 +19,7 @@ public class PlayerCan extends BaseTest {
     }
 
     @Test
-    public void leaveGame() throws PlayerNotInGameException, PlayerAlreadyInGameException {
+    public void leaveGame() throws PlayerNotInGameException, PlayerAlreadyInGameException, GameIsFullException {
         Player player = newPlayerInGame();
 
         player.leaveGame();
@@ -28,7 +28,7 @@ public class PlayerCan extends BaseTest {
     }
 
     @Test (expected = PlayerAlreadyInGameException.class)
-    public void joinOnlyOneGame() throws PlayerAlreadyInGameException {
+    public void joinOnlyOneGame() throws PlayerAlreadyInGameException, GameIsFullException {
         Player player = newPlayerInGame();
 
         player.join(new Game());

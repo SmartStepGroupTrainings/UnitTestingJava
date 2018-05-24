@@ -6,11 +6,12 @@ package com.ssg.casino.domain;
 public class Player {
     public boolean isInGame = false;
 
-    public void join(Game game) throws PlayerAlreadyInGameException {
+    public void join(Game game) throws PlayerAlreadyInGameException, GameIsFullException {
         if (isInGame) {
             throw new PlayerAlreadyInGameException();
         }
         isInGame = true;
+        game.accept(this);
     }
 
     public void leaveGame() throws PlayerNotInGameException {
