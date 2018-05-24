@@ -17,4 +17,12 @@ public class Player {
         }
         throw new PlayerIsNotInGameException();
     }
+
+    public void buy(int i) {
+
+    }
+
+    public int getChips() {
+        return 1;
+    }
 }

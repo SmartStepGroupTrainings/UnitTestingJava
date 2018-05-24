@@ -32,4 +32,13 @@ public class PlayerCan extends TestBase {
 
        player.enter(newGame());
     }
+
+    @Test
+    public void buyChips() {
+        Player player = newPlayer();
+
+        player.buy(10);
+
+        assertTrue(player.getChips()>0);
+    }
 }
