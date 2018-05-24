@@ -8,10 +8,10 @@ import static junit.framework.TestCase.assertTrue;
 /**
  * Created by ostkav15 24.05.18
  **/
-public class PlayerCan {
+public class PlayerCan extends BaseTest {
     @Test
     public void joinGame() {
-        Player player = new Player();
+        Player player = newPlayer();
 
         player.join(new Game());
 
@@ -19,8 +19,8 @@ public class PlayerCan {
     }
 
     @Test
-    public void leaveGame() {
-        Player player = new Player();
+    public void leaveGame() throws PlayerNotInGameException {
+        Player player = newPlayerInGame();
 
         player.leaveGame();
 
