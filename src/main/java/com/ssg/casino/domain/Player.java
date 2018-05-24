@@ -2,6 +2,7 @@ package com.ssg.casino.domain;
 
 import com.ssg.casino.domain.exceptions.CanNotAddNewPlayerToTheGameException;
 import com.ssg.casino.domain.exceptions.CanNotLeaveTheGameException;
+import com.ssg.casino.domain.exceptions.NotEnoughChipsException;
 import com.ssg.casino.domain.exceptions.OnlyOneGameException;
 
 public class Player {
@@ -33,8 +34,12 @@ public class Player {
         this.chips = chips;
     }
 
-    public void doBet(Bet bet) {
-        this.bet = bet;
+    public void doBet(Bet bet) throws NotEnoughChipsException {
 
+        if (bet.amount > chips) {
+            throw new NotEnoughChipsException();
+        }
+
+        this.bet = bet;
     }
 }

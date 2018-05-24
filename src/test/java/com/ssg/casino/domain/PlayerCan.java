@@ -2,6 +2,7 @@ package com.ssg.casino.domain;
 
 import com.ssg.casino.domain.exceptions.CanNotAddNewPlayerToTheGameException;
 import com.ssg.casino.domain.exceptions.CanNotLeaveTheGameException;
+import com.ssg.casino.domain.exceptions.NotEnoughChipsException;
 import com.ssg.casino.domain.exceptions.OnlyOneGameException;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,16 +13,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 public class PlayerCan extends Base {
-
-    private ObjectFather creator = new ObjectFather();
-
-    private Game game;
-
-    @Before
-    public void setUp() {
-        game = new Game();
-
-    }
 
     @Test
     public void enterTheGame() throws OnlyOneGameException, CanNotAddNewPlayerToTheGameException {
@@ -55,7 +46,7 @@ public class PlayerCan extends Base {
     }
 
     @Test
-    public void doBetInGame() {
+    public void doBetInGame() throws NotEnoughChipsException {
         Player playerInGame = creator
                 .newPlayer()
                 .withGame(game)

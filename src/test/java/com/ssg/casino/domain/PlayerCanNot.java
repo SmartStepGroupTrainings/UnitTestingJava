@@ -1,6 +1,7 @@
 package com.ssg.casino.domain;
 
 import com.ssg.casino.domain.exceptions.CanNotLeaveTheGameException;
+import com.ssg.casino.domain.exceptions.NotEnoughChipsException;
 import org.junit.Test;
 
 public class PlayerCanNot extends Base {
@@ -10,5 +11,16 @@ public class PlayerCanNot extends Base {
         Player player = newPlayer();
 
         player.leave();
+    }
+
+    @Test(expected = NotEnoughChipsException.class)
+    public void betMoreChipsThanHeHas() throws NotEnoughChipsException {
+        Player playerInGame = creator
+                .newPlayer()
+                .withGame(game)
+                .withChips(10)
+                .please();
+
+        playerInGame.doBet(new Bet(10 + 1));
     }
 }
