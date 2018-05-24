@@ -4,4 +4,8 @@ public class TestBase {
     protected Player newPlayer() {
         return new Player();
     }
+
+    protected Game newGame() {
+        return new Game();
+    }
 }

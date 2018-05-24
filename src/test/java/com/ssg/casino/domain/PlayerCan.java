@@ -10,14 +10,15 @@ public class PlayerCan extends TestBase {
     public void enterInGame() {
         Player player = newPlayer();
 
-        player.enter(new Game());
+        player.enter(newGame());
 
         assertTrue(player.isInGame);
     }
 
     @Test
-    public void exitFromGame() {
+    public void exitFromGame() throws PlayerIsNotInGame {
         Player player = newPlayer();
+        player.enter(newGame());
 
         player.exit();
 
