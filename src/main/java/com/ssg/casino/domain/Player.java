@@ -9,4 +9,8 @@ public class Player {
     public void join(Game game) {
 
     }
+
+    public void leaveGame() {
+        isInGame = false;
+    }
 }
