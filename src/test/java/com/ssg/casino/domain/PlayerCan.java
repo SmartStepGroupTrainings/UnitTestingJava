@@ -8,6 +8,7 @@ import org.junit.Test;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 public class PlayerCan extends Base {
 
@@ -40,5 +41,19 @@ public class PlayerCan extends Base {
         player.buyChips(1);
 
         assertEquals(1, player.chips);
+    }
+
+    @Test
+    public void doBetInGame() {
+
+        Bet bet = new Bet();
+
+        Game game = new Game();
+
+        ObjectFather creator = new ObjectFather();
+        Player playerInGame = creator.playerInGame(game).withBet(bet).please();
+
+        
+        assertNotNull(playerInGame.bet);
     }
 }
