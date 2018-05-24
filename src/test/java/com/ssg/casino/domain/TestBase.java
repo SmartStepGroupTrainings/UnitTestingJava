@@ -14,4 +14,15 @@ public class TestBase {
         player.enter(newGame());
         return player;
     }
+
+    protected Game newFullGame() throws GameIsFull {
+        Game game = newGame();
+        game.add(newPlayer());
+        game.add(newPlayer());
+        game.add(newPlayer());
+        game.add(newPlayer());
+        game.add(newPlayer());
+        game.add(newPlayer());
+        return game;
+    }
 }
