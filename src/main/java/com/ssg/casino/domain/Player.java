@@ -3,7 +3,9 @@ package com.ssg.casino.domain;
 public class Player {
     public boolean isInGame = false;
 
-    public void enter(Game game) {
+    public void enter(Game game) throws PlayerIsInGame {
+        if (isInGame)
+            throw new PlayerIsInGame();
         isInGame = true;
 
     }

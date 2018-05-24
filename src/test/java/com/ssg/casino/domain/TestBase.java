@@ -8,4 +8,10 @@ public class TestBase {
     protected Game newGame() {
         return new Game();
     }
+
+    protected Player newPlayerInGame() throws PlayerIsInGame {
+        Player player = newPlayer();
+        player.enter(newGame());
+        return player;
+    }
 }
