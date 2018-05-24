@@ -6,4 +6,8 @@ public class Player {
     public void enter(Game game) {
 
     }
+
+    public void exit() {
+        isInGame = false;
+    }
 }
