@@ -5,7 +5,8 @@ package com.ssg.casino.domain;
  **/
 public class Player {
     public boolean isInGame = false;
-    public boolean hasChips = false;
+    public int chipsAmount = 0;
+    public int betAmount = 0;
 
     public void join(Game game) throws PlayerAlreadyInGameException, GameIsFullException {
         if (isInGame) {
@@ -23,7 +24,22 @@ public class Player {
     }
 
 
-    public void buy() {
-        this.hasChips = true;
+    public void buy(int chipsAmount) {
+        this.chipsAmount = chipsAmount;
+    }
+
+    public void makeBet(int betAmount) throws NotEnoughChipsException {
+        if (betAmount > chipsAmount) {
+            throw new NotEnoughChipsException();
+        }
+        this.betAmount = betAmount;
+    }
+
+    public boolean hadBet() {
+        return betAmount > 0;
+    }
+
+    public boolean hasChips() {
+        return chipsAmount > 0;
     }
 }

@@ -33,4 +33,10 @@ public class BaseTest {
 
         return game;
     }
+
+    protected Player richPlayerInGame() throws PlayerAlreadyInGameException, GameIsFullException {
+        Player player = newPlayerInGame();
+        player.buy(Integer.MAX_VALUE);
+        return player;
+    }
 }

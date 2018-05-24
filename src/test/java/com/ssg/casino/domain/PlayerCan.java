@@ -39,17 +39,18 @@ public class PlayerCan extends BaseTest {
     public void buyChipsFromCasino() {
         Player player = newPlayer();
 
-        player.buy();
+        player.buy(10);
 
-        assertTrue(player.hasChips);
+        assertTrue(player.hasChips());
     }
 
     @Test
-    public void makeBetInGame() {
-        Player player = newPlayer();
+    public void makeBetInGame() throws NotEnoughChipsException, GameIsFullException, PlayerAlreadyInGameException {
+        Player player = richPlayerInGame();
 
-        player.makeBet();
+        player.makeBet(1);
 
-        assertTrue(player.hadBet);
+        assertTrue(player.hadBet());
     }
+
 }
